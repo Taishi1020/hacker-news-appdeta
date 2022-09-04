@@ -21,6 +21,4 @@ const server = new ApolloServer({
     resolvers,
 })
 
-server
-    .listen()
-    .then(({url}) => console.log(`${url}でサーバーを起動中・・・`));
+server.listen().then(({url}) => console.log(`${url}でサーバーを起動中・・・`));
