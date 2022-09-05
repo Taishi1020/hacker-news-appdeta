@@ -1,7 +1,9 @@
 //ドキュメント参照
 //https://www.apollographql.com/docs/apollo-server/getting-started
 
-const {ApolloServer, gql} = require("apollo-server");
+const {ApolloServer} = require("apollo-server");
+const fs =  require("fs")
+const path = require("path")
 
 let links = [
     {
@@ -10,23 +12,6 @@ let links = [
         url: "www.graphql-tutorial.com",
     }
 ]
-
-//GraphQLのスキーマ定義
-const typeDefs = gql`
- type Query {
-   info: String!
-   feed: [Link]!
- }
- type Link {
- id: ID!
- description: String!
- url: String!
- }
- 
- type Mutation {
-     post(url: String!, description: String!): Link!
- } 
-`;
 
 //resolversの処理が正常に動作していれば,APIを叩いた時に想定通りのデータが返ってくる↓
 const resolvers = {
@@ -53,7 +38,7 @@ const resolvers = {
 }
 
 const server = new ApolloServer({
-    typeDefs,
+    typeDefs: fs.readFileSync(path.join(__dirname, "schema.graphql"), "utf-8"),
     resolvers,
 })
 
