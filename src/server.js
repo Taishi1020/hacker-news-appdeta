@@ -38,6 +38,7 @@ const resolvers = {
 }
 
 const server = new ApolloServer({
+    //__dirnameの中にghqのパスが格納されており、参照しているパスが第二引数にあたる→schema.graphql
     typeDefs: fs.readFileSync(path.join(__dirname, "schema.graphql"), "utf-8"),
     resolvers,
 })
